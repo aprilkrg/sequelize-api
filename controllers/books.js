@@ -1,17 +1,20 @@
 const models = require("../models");
-const express = require("express");
-const router = express.Router();
+const bookController = {};
 
 // URL: 3000/book   HTTP: GET
-router.get("/", async function findAllBooks(req, res) {
-    const books = await models.book.findAll();
-    console.log(books, 'all books from db');
-    res.json(books);
-    return books;
-});
+bookController.findAllBooks = async function (req, res) {
+    try {
+        const books = await models.book.findAll();
+        console.log(books, 'all books from db');
+        res.json(books);
+        return books;
+    } catch (err) {
+        res.json(err);
+    };
+};
 
 // URL: 3000/book   HTTP: POST
-router.post("/", async function postNewBook(req, res) {
+bookController.postNewBook =  async function(req, res) {
     try {
         console.log(req.body, 'req.bodyyyy');
         // const newBook = req.body;
@@ -26,10 +29,10 @@ router.post("/", async function postNewBook(req, res) {
     } catch (err) {
         res.json(err);
     };
-});
+};
 
 // URL: 3000/book/1  HTTP: GET
-router.get("/:id", async function (req, res) {
+bookController.getOneBook = async function(req, res) {
     try {
         const oneBook = await models.book.findOne({
             where: {
@@ -43,10 +46,10 @@ router.get("/:id", async function (req, res) {
     } catch (err) {
         res.json(err);
     };
-});
+};
 
 // URL: 3000/book/1  HTTP: PUT
-router.put("/:id", async function (req, res) {
+bookController.updateBook = async function(req, res) {
     try {
         const updates = req.body;
         const bookToChange = await models.book.findOne({
@@ -62,10 +65,10 @@ router.put("/:id", async function (req, res) {
     } catch (err) {
         res.json(err);
     };
-});
+};
 
 // URL: 3000/book/1  HTTP: DELETE
-router.delete("/:id", async function (req, res) {
+bookController.deleteBook = async function(req, res) {
     try {
         const deletedBook = await models.book.destroy({
             where: {
@@ -77,6 +80,6 @@ router.delete("/:id", async function (req, res) {
     } catch (err) {
         res.json(err);
     };
-});
+};
 
-module.exports = router;
+module.exports = bookController;

@@ -317,7 +317,7 @@ router.delete("/:id", async function(req, res){
 module.exports = router;
 ```
 
-## Now our book model has full CRUD too!
+# Now our book model has full CRUD too!
 
 # Refactor our controllers to use `try/catch`
 We'll be adding these lines to every function in the author and book controllers:
@@ -499,3 +499,145 @@ router.delete("/:id", async function (req, res) {
 
 module.exports = router;
 ```
+
+## Add routes to breakup controllers
+Create directory for routes: `mkdir routes`
+
+Create files for each model in routes: `touch routes/bookRoutes.js routes/authorRoutes.js`
+
+Now we'll be taking the `router` out of the controller, since we're separating concerns. We create a controller object and assign methods to it to handle our CRUD.
+### make changes to `controllers/books.js`
+```
+const models = require("../models");
+const bookController = {};
+
+// URL: 3000/book   HTTP: GET
+bookController.findAllBooks = async function (req, res) {
+    try {
+        const books = await models.book.findAll();
+        console.log(books, 'all books from db');
+        res.json(books);
+        return books;
+    } catch (err) {
+        res.json(err);
+    };
+};
+
+// URL: 3000/book   HTTP: POST
+bookController.postNewBook =  async function(req, res) {
+    try {
+        console.log(req.body, 'req.bodyyyy');
+        // const newBook = req.body;
+        // const newBook = { title, genre, year, plotSummary, authorId };
+        const { title, genre, year, plotSummary, authorId } = req.body;
+        const createdBook = await models.book.create({
+            title, genre, year, plotSummary, authorId
+        });
+        console.log(createdBook, 'book create');
+        res.json(createdBook);
+        return createdBook;
+    } catch (err) {
+        res.json(err);
+    };
+};
+
+// URL: 3000/book/1  HTTP: GET
+bookController.getOneBook = async function(req, res) {
+    try {
+        const oneBook = await models.book.findOne({
+            where: {
+                id: req.params.id
+            }
+        });
+        console.log(oneBook, 'found one');
+        res.json(oneBook);
+        return oneBook;
+
+    } catch (err) {
+        res.json(err);
+    };
+};
+
+// URL: 3000/book/1  HTTP: PUT
+bookController.updateBook = async function(req, res) {
+    try {
+        const updates = req.body;
+        const bookToChange = await models.book.findOne({
+            where: {
+                id: req.params.id
+            }
+        });
+        const changedBook = await bookToChange.update(updates);
+        console.log(changedBook);
+        res.json(changedBook);
+        return changedBook;
+
+    } catch (err) {
+        res.json(err);
+    };
+};
+
+// URL: 3000/book/1  HTTP: DELETE
+bookController.deleteBook = async function(req, res) {
+    try {
+        const deletedBook = await models.book.destroy({
+            where: {
+                id: req.params.id
+            }
+        });
+        console.log("Deleted!");
+        res.json({ deletedBook });
+    } catch (err) {
+        res.json(err);
+    };
+};
+
+module.exports = bookController;
+```
+
+### make changes to `routes/bookRoutes.js`
+```
+const bookCntlr = require("../controllers/books");
+const express = require("express");
+const router = express.Router();
+
+// URL: 3000/books  HTTP: GET
+router.get("/", bookCntlr.findAllBooks);
+
+module.exports = router;
+```
+
+### make additions to `server.js`
+```
+const bookRoutes = require("./routes/bookRoutes");
+app.use("/book", bookRoutes);
+```
+
+# Now the books model is using MCR separation of concerns!
+
+Keep converting the books controller so all the routes have a corresponding controller.
+
+### make changes to `routes/bookRoutes.js`
+```
+const bookCntlr = require("../controllers/books");
+const express = require("express");
+const router = express.Router();
+
+// URL: 3000/book  HTTP: GET
+router.get("/", bookCntlr.findAllBooks);
+
+// URL: 3000/book/1  HTTP: GET
+router.get("/:id", bookCntlr.getOneBook);
+
+// URL: 3000/book   HTTP: POST
+router.post("/", bookCntlr.postNewBook);
+
+// URL: 3000/book/1  HTTP: PUT
+router.put("/:id", bookCntlr.updateBook);
+
+// URL: 3000/book/1  HTTP: DELETE
+router.delete("/:id", bookCntlr.deleteBook);
+
+module.exports = router;
+```
+
