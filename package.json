@@ -1,0 +1,20 @@
+{
+  "name": "ga_mazon",
+  "version": "1.0.0",
+  "description": "practice api for ga class",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "akrg",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "pg": "^8.7.1",
+    "rowdy-logger": "^1.0.2",
+    "sequelize": "^6.9.0"
+  }
+}
