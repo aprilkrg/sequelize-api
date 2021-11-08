@@ -3,11 +3,3 @@ sequelize model:generate --name=book --attributes title:string,genre:string,year
 sequelize model:generate --name=author --attributes name:string,birthYear:integer,country:string
 
 sequelize db:migrate
-
-{
-    "title": "The Hound of the Baskervilles",
-    "genre": "Mystery",
-    "year": "1850",
-    "plotSummary": "Sherlock lies to Watson and spend a while hiding on the moor",
-    "authorId": 1
-}

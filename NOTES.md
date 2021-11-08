@@ -500,6 +500,7 @@ router.delete("/:id", async function (req, res) {
 module.exports = router;
 ```
 
+# REFACTOR TO MVCR (without the V yet)
 ## Add routes to breakup controllers
 Create directory for routes: `mkdir routes`
 

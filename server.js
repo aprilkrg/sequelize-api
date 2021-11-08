@@ -4,9 +4,7 @@ const rowdy = require("rowdy-logger");
 const routesReport = rowdy.begin(app);
 
 const PORT = 3000;
-// const models = require("./models");
-// const bookController = require("./controllers/books");
-// const authorController = require("./controllers/authors");
+
 const bookRoutes = require("./routes/bookRoutes");
 const authorRoutes = require("./routes/authorRoutes");
 
