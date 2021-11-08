@@ -12,7 +12,7 @@ router.get("/:id", authorCntlr.getOneAuthor)
 router.post("/", authorCntlr.postNewAuthor);
 
 // URL: 3000/author/1  HTTP: PUT
-router.put(authorCntlr.updateAuthor);
+router.put("/:id", authorCntlr.updateAuthor);
 
 // URL: 3000/author/1  HTTP: DELETE
 router.delete("/:id", authorCntlr.deleteOne);
