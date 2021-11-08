@@ -1,9 +1,8 @@
 const models = require("../models");
-const express = require("express");
-const router = express.Router();
+const authorController = {};
 
 // URL: 3000/author   HTTP: GET
-router.get("/", async function findAllAuthors(req, res) {
+authorController.findAllAuthors = async function(req, res) {
     try {
         const authors = await models.author.findAll();
         console.log(authors, 'all authors from db');
@@ -12,10 +11,10 @@ router.get("/", async function findAllAuthors(req, res) {
     } catch(err) {
         res.json(err);
     };
-});
+};
 
 // URL: 3000/author   HTTP: POST
-router.post("/", async function postNewAuthor(req, res) {
+authorController.postNewAuthor = async function(req, res) {
     try {
         console.log(req.body, 'req.bodyyyy');
         const { name, birthYear, country } = req.body;
@@ -28,10 +27,10 @@ router.post("/", async function postNewAuthor(req, res) {
     } catch(err) {
         res.json(err);
     };
-});
+};
 
 // URL: 3000/author/1  HTTP: GET
-router.get("/:id", async function(req,res) {
+authorController.getOneAuthor = async function(req,res) {
     try {
         const oneAuthor = await models.author.findOne({
             where: {
@@ -44,10 +43,10 @@ router.get("/:id", async function(req,res) {
     } catch(err) {
         res.json(err);
     };
-});
+};
 
 // URL: 3000/author/1  HTTP: PUT
-router.put("/:id", async function(req, res) {
+authorController.updateAuthor = async function(req, res) {
     try {
         const updates = req.body;
         const authorToChange = await models.author.findOne({
@@ -62,10 +61,10 @@ router.put("/:id", async function(req, res) {
     } catch(err) {
         res.json(err);
     };
-});
+};
 
 // URL: 3000/author/1  HTTP: DELETE
-router.delete("/:id", async function(req, res){
+authorController.deleteOne = async function(req, res){
     try {
         const deletedAuthor = await models.author.destroy({
             where: {
@@ -77,6 +76,6 @@ router.delete("/:id", async function(req, res){
     } catch(err) {
         res.json(err);
     };
-});
+};
     
-module.exports = router;
+module.exports = authorController;

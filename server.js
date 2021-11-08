@@ -6,14 +6,14 @@ const routesReport = rowdy.begin(app);
 const PORT = 3000;
 // const models = require("./models");
 // const bookController = require("./controllers/books");
-const authorController = require("./controllers/authors");
-
+// const authorController = require("./controllers/authors");
 const bookRoutes = require("./routes/bookRoutes");
+const authorRoutes = require("./routes/authorRoutes");
 
 app.use(express.json());
 
 app.use("/book", bookRoutes);
-app.use("/author", authorController);
+app.use("/author", authorRoutes);
 
 app.get("/", function(req,res) {
     res.send("Hello world");
