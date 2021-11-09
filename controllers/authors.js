@@ -78,4 +78,9 @@ authorController.deleteOne = async function(req, res){
     };
 };
     
-module.exports = authorController;
+// module.exports = authorController;
+exports.findAllAuthors = authorController.findAllAuthors;
+exports.getOneAuthor = authorController.getOneAuthor;
+exports.postNewAuthor = authorController.postNewAuthor;
+exports.updateAuthor = authorController.updateAuthor;
+exports.deleteOne = authorController.deleteOne;
