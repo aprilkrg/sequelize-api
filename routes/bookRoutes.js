@@ -1,20 +1,20 @@
-const bookCntlr = require("../controllers/books");
+const { findAllBooks, getOneBook, postNewBook, updateBook, deleteBook } = require("../controllers/books");
 const express = require("express");
 const router = express.Router();
 
 // URL: 3000/book  HTTP: GET
-router.get("/", bookCntlr.findAllBooks);
+router.get("/", findAllBooks);
 
 // URL: 3000/book/1  HTTP: GET
-router.get("/:id", bookCntlr.getOneBook);
+router.get("/:id", getOneBook);
 
 // URL: 3000/book   HTTP: POST
-router.post("/", bookCntlr.postNewBook);
+router.post("/", postNewBook);
 
 // URL: 3000/book/1  HTTP: PUT
-router.put("/:id", bookCntlr.updateBook);
+router.put("/:id", updateBook);
 
 // URL: 3000/book/1  HTTP: DELETE
-router.delete("/:id", bookCntlr.deleteBook);
+router.delete("/:id", deleteBook);
 
 module.exports = router;
