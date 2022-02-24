@@ -14,7 +14,7 @@ Create files for server and gitignore: `touch .gitignore server.js`
 
 
 ### make changes to `config/config.json`
-```
+```json
 {
   "development": {
     "database": "ga_mazon_db",
@@ -24,7 +24,7 @@ Create files for server and gitignore: `touch .gitignore server.js`
 }
 ```
 ### make additions to `server.js`
-```
+```js
 const express = require("express");
 const app = express();
 const rowdy = require("rowdy-logger");
@@ -45,7 +45,7 @@ app.listen(PORT, function() {
 });
 ```
 ### make changes to `package.json` scripts
-```
+```json
 {
   "name": "ga_mazon",
   "version": "1.0.0",
@@ -86,7 +86,7 @@ Create files: `touch controllers/books.js controllers/authors.js controllers/ind
 
 
 ### make changes to `controllers/books.js`
-```
+```js
 const models = require("../models");
 const express = require("express");
 const router = express.Router();
@@ -101,12 +101,12 @@ module.exports = router;
 ```
 
 ### make changes to `controllers/index.js`
-```
+```js
 module.exports = require("./books");
 ```
 
 ### make changes to `server.js`
-```
+```js
 const controllers = require("./controllers");
 app.use("/book", controllers);
 ```
@@ -114,7 +114,7 @@ app.use("/book", controllers);
 Everything is connected! And now to add the author model...
 
 ### make changes to `controllers/author.js`
-```
+```js
 const models = require("../models");
 const express = require("express");
 const router = express.Router();
@@ -143,7 +143,7 @@ module.exports = router;
 ```
 
 ### make changes to `server.js`
-```
+```js
 const bookController = require("./controllers/books");
 const authorController = require("./controllers/authors");
 app.use("/book", bookController);
@@ -151,7 +151,7 @@ app.use("/author", authorController);
 ```
 
 ### make changes to `controllers/books.js`
-```
+```js
 const models = require("../models");
 const express = require("express");
 const router = express.Router();
@@ -193,7 +193,7 @@ module.exports = router;
 ```
 
 ### make changes to `controllers/authors.js`
-```
+```js
 const models = require("../models");
 const express = require("express");
 const router = express.Router();
@@ -250,7 +250,7 @@ module.exports = router;
 # We can now Create, Read, Update on the author model!
 
 ### make changes to `controllers/books.js`
-```
+```js
 const models = require("../models");
 const express = require("express");
 const router = express.Router();
@@ -321,7 +321,7 @@ module.exports = router;
 
 # Refactor our controllers to use `try/catch`
 We'll be adding these lines to every function in the author and book controllers:
-```
+```js
 try {
 
 } catch(err) {
@@ -330,7 +330,7 @@ try {
 ```
 
 ### make changes to `controllers/authors.js`
-```
+```js
 const models = require("../models");
 const express = require("express");
 const router = express.Router();
@@ -415,7 +415,7 @@ router.delete("/:id", async function(req, res){
 module.exports = router;
 ```
 ### make changes to `controllers/books.js`
-```
+```js
 const models = require("../models");
 const express = require("express");
 const router = express.Router();
@@ -508,7 +508,7 @@ Create files for each model in routes: `touch routes/bookRoutes.js routes/author
 
 Now we'll be taking the `router` out of the controller, since we're separating concerns. We create a controller object and assign methods to it to handle our CRUD.
 ### make changes to `controllers/books.js`
-```
+```js
 const models = require("../models");
 const bookController = {};
 
@@ -597,7 +597,7 @@ module.exports = bookController;
 ```
 
 ### make changes to `routes/bookRoutes.js`
-```
+```js
 const bookCntlr = require("../controllers/books");
 const express = require("express");
 const router = express.Router();
@@ -609,7 +609,7 @@ module.exports = router;
 ```
 
 ### make additions to `server.js`
-```
+```js
 const bookRoutes = require("./routes/bookRoutes");
 app.use("/book", bookRoutes);
 ```
@@ -619,7 +619,7 @@ app.use("/book", bookRoutes);
 Keep converting the books controller so all the routes have a corresponding controller.
 
 ### make changes to `routes/bookRoutes.js`
-```
+```js
 const bookCntlr = require("../controllers/books");
 const express = require("express");
 const router = express.Router();
@@ -643,7 +643,7 @@ module.exports = router;
 ```
 
 ### make changes to `controllers/authors.js`
-```
+```js
 const models = require("../models");
 const authorController = {};
 
@@ -728,7 +728,7 @@ module.exports = authorController;
 ```
 
 ### make changes to `routes/authorRoutes.js`
-``` 
+```js
 const authorCntlr = require("../controllers/authors");
 const express = require("express");
 const router = express.Router();
@@ -754,7 +754,7 @@ module.exports = router;
 Connect it all in `server.js`!
 
 ### make changes to `server.js`
-```
+```js
 const express = require("express");
 const app = express();
 const rowdy = require("rowdy-logger");
@@ -783,7 +783,7 @@ app.listen(PORT, function() {
 ## Play around with how exports work
 
 ### make changes to `controllers/authors.js`
-```
+```js
 const models = require("../models");
 const authorController = {};
 
@@ -873,7 +873,7 @@ exports.deleteOne = authorController.deleteOne;
 ```
 
 ### make changes to `routes/authorRoutes.js`
-```
+```js
 const { findAllAuthors, getOneAuthor, postNewAuthor, updateAuthor, deleteOne } = require("../controllers/authors");
 const express = require("express");
 const router = express.Router();
