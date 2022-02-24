@@ -1,3 +1,5 @@
+// use object destructuring to import function names from object exported from controllers
+// this allows for a cleaner syntax for the callback function 
 const { findAllAuthors, getOneAuthor, postNewAuthor, updateAuthor, deleteOne } = require("../controllers/authors");
 const express = require("express");
 const router = express.Router();

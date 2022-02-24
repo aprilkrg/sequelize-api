@@ -1,3 +1,4 @@
+// the bookCntlr object was exported from controllers, so we access the functions using dot notation
 const bookCntlr = require("../controllers/books");
 const express = require("express");
 const router = express.Router();
