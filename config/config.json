@@ -1,6 +1,6 @@
 {
   "development": {
-    "database": "ga_mazon_db",
+    "database": "ga_mazon",
     "host": "127.0.0.1",
     "dialect": "postgresql"
   }

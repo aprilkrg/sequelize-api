@@ -73,12 +73,31 @@ Create file to save sequelize commands: `touch sequelize.txt`
 ```
 sequelize model:generate --name=book --attributes title:string,genre:string,year:integer,plotSummary:string,authorId:integer
 sequelize model:generate --name=author --attributes name:string,birthYear:integer,country:string
+```
+
+Then, run those commands to create the models.
+
+### make changes to `models/author.js`
+```js
+static associate(models) {
+    // define association here
+    models.author.hasMany(models.book)
+}
+```
+
+### make changes to `models/book.js`
+```js
+static associate(models) {
+    // define association here
+    models.book.belongsTo(models.author)
+}
+```
+
+### migrate the changes to db
+```
 sequelize db:migrate
 ```
 
-Then, run those commands to create the models and migrate the changes to the database ^^^
-
--- do we need to create associations in the models files?? --
 
 Create controllers directory: `mkdir controllers`
 
