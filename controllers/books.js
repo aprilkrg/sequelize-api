@@ -1,4 +1,6 @@
 const models = require("../models");
+// create an empty object so we can add properties which are functions
+// export object at end of file to be able to use it!
 const bookController = {};
 
 // URL: 3000/book   HTTP: GET

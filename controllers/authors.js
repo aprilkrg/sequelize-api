@@ -1,4 +1,6 @@
 const models = require("../models");
+// create an empty object so we can add properties which are functions
+// export object at end of file to be able to use it!
 const authorController = {};
 
 // URL: 3000/author   HTTP: GET
@@ -78,9 +80,11 @@ authorController.deleteOne = async function(req, res){
     };
 };
     
-// module.exports = authorController;
-exports.findAllAuthors = authorController.findAllAuthors;
-exports.getOneAuthor = authorController.getOneAuthor;
-exports.postNewAuthor = authorController.postNewAuthor;
-exports.updateAuthor = authorController.updateAuthor;
-exports.deleteOne = authorController.deleteOne;
+module.exports = authorController;
+
+// previously thought I had to export the authorController in this way to use object destructuring in the routes, but I think I was wrong
+// exports.findAllAuthors = authorController.findAllAuthors;
+// exports.getOneAuthor = authorController.getOneAuthor;
+// exports.postNewAuthor = authorController.postNewAuthor;
+// exports.updateAuthor = authorController.updateAuthor;
+// exports.deleteOne = authorController.deleteOne;

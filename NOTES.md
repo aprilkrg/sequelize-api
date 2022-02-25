@@ -13,6 +13,7 @@ Add sequelize ORM: `sequelize init`
 Create files for server and gitignore: `touch .gitignore server.js`
 
 
+## Into the code!
 ### make changes to `config/config.json`
 ```json
 {
@@ -80,7 +81,6 @@ Then, run those commands to create the models.
 ### make changes to `models/author.js`
 ```js
 static associate(models) {
-    // define association here
     models.author.hasMany(models.book)
 }
 ```
@@ -88,15 +88,17 @@ static associate(models) {
 ### make changes to `models/book.js`
 ```js
 static associate(models) {
-    // define association here
     models.book.belongsTo(models.author)
 }
 ```
 
-### migrate the changes to db
+### migrate the changes to the database
 ```
 sequelize db:migrate
 ```
+
+
+## Time for controllers!
 
 
 Create controllers directory: `mkdir controllers`
@@ -266,7 +268,7 @@ router.put("/:id", async function(req, res) {
 module.exports = router;
 ```
 
-# We can now Create, Read, Update on the author model!
+## We can now Create, Read, Update on the author model
 
 ### make changes to `controllers/books.js`
 ```js
@@ -336,9 +338,11 @@ router.delete("/:id", async function(req, res){
 module.exports = router;
 ```
 
-# Now our book model has full CRUD too!
+## Now our book model has full CRUD too!
 
-# Refactor our controllers to use `try/catch`
+#
+
+## Refactor our controllers to use `try/catch`
 We'll be adding these lines to every function in the author and book controllers:
 ```js
 try {
@@ -519,8 +523,10 @@ router.delete("/:id", async function (req, res) {
 module.exports = router;
 ```
 
-# REFACTOR TO MVCR (without the V yet)
-## Add routes to breakup controllers
+#
+## REFACTOR TO MCR 
+### Add routes to breakup controllers
+
 Create directory for routes: `mkdir routes`
 
 Create files for each model in routes: `touch routes/bookRoutes.js routes/authorRoutes.js`
@@ -633,7 +639,7 @@ const bookRoutes = require("./routes/bookRoutes");
 app.use("/book", bookRoutes);
 ```
 
-# Now the books model is using MCR separation of concerns!
+## Now the books model is using MCR separation of concerns!
 
 Keep converting the books controller so all the routes have a corresponding controller.
 
@@ -890,6 +896,7 @@ exports.postNewAuthor = authorController.postNewAuthor;
 exports.updateAuthor = authorController.updateAuthor;
 exports.deleteOne = authorController.deleteOne;
 ```
+*The above method of exporting is unnecessary, I was just playing around.*
 
 ### make changes to `routes/authorRoutes.js`
 ```js
@@ -916,3 +923,29 @@ module.exports = router;
 ```
 
 Now test in thunderclient to see if it works!
+
+### Authors:
+
+[X] Create
+
+[X] Read (all)
+
+[X] Read (one)
+
+[X] Update
+
+[] Delete
+
+
+### Books:
+
+[X] Create
+
+[X] Read (all)
+
+[X] Read (one)
+
+[X] Update
+
+[] Delete
+

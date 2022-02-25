@@ -1,7 +1,7 @@
-// the bookCntlr object was exported from controllers, so we access the functions using dot notation
-const bookCntlr = require("../controllers/books");
 const express = require("express");
 const router = express.Router();
+// the bookCntlr object was exported from controllers, so we access the functions using dot notation
+const bookCntlr = require("../controllers/books");
 
 // URL: 3000/book  HTTP: GET
 router.get("/", bookCntlr.findAllBooks);

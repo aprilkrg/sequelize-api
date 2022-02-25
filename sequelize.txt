@@ -3,3 +3,25 @@ sequelize model:generate --name=book --attributes title:string,genre:string,year
 sequelize model:generate --name=author --attributes name:string,birthYear:integer,country:string
 
 sequelize db:migrate
+
+
+author req.body
+{
+    "name": "Xiran Jay Zhao",
+    "birthYear": 1990,
+    "country": "United States"
+},
+{
+    "name": "Xiran Jay Zhao",
+    "birthYear": 1997,
+    "country": "China"
+}
+
+book req.body
+{
+    "title": "Iron Widow",
+    "genre": "fantasy/sci-fi",
+    "year": 2020,
+    "plotSummary": "SciFi take on a magical reimagining of the first empress of China",
+    "authorId": 1
+}
