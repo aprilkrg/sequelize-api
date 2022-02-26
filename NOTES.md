@@ -934,7 +934,7 @@ Now test in thunderclient to see if it works!
 
 [X] Update
 
-[] Delete
+[X] Delete
 
 
 ### Books:
@@ -947,5 +947,5 @@ Now test in thunderclient to see if it works!
 
 [X] Update
 
-[] Delete
+[X] Delete
 
