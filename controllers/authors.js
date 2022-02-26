@@ -8,7 +8,7 @@ authorController.findAllAuthors = async function(req, res) {
     try {
         const authors = await models.author.findAll();
         console.log(authors, 'all authors from db');
-        res.json(authors);
+        res.render("authors", {authors});
         return authors;
     } catch(err) {
         res.json(err);

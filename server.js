@@ -8,13 +8,14 @@ const PORT = 3000;
 const bookRoutes = require("./routes/bookRoutes");
 const authorRoutes = require("./routes/authorRoutes");
 
+app.set("view engine", "ejs");
 app.use(express.json());
 
 app.use("/book", bookRoutes);
 app.use("/author", authorRoutes);
 
 app.get("/", function(req,res) {
-    res.send("Hello world");
+    res.render("index");
 });
 
 app.listen(PORT, function() {
