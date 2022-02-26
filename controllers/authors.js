@@ -73,8 +73,13 @@ authorController.deleteOne = async function(req, res){
                 id: req.params.id
             }
         });
+        const deletedBooks = await models.book.destroy({
+            where: {
+                authorId: req.params.id 
+            }
+        });
         console.log("Deleted!");
-        res.json({deletedAuthor});
+        res.json({deletedAuthor, deletedBooks});
     } catch(err) {
         res.json(err);
     };
